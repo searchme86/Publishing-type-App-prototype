@@ -7,9 +7,14 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
+  watch: true,
+  watchOptions: {
+    poll: 1000,
+    ignored: /node_modules/,
+  },
   entry: './src/scripts/app.ts',
   output: {
-    filename: 'bundle.js',
+    filename: 'js/bundle.js',
     path: path.resolve(__dirname, './dist'),
     clean: true,
   },
@@ -17,20 +22,36 @@ module.exports = {
     rules: [
       {
         test: /[\.js]$/,
-        exclude: /node_module/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+          },
         },
       },
       {
         test: /\.ts$/,
-        exclude: /node_module/,
+        exclude: /node_modules/,
         use: 'ts-loader',
         include: [path.resolve(__dirname, 'src/scripts')],
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.scss?$/,
+        exclude: /node_modules/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        exclude: /node_module/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            name: 'assets/[name].[hash].[ext]',
+            fallback: 'file-loader',
+            limit: 5000, // 5kb 미만 파일만 data url로 처리
+          },
+        },
       },
     ],
   },
@@ -45,7 +66,7 @@ module.exports = {
       inject: 'body',
     }),
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: 'css/style.css',
     }),
   ],
   optimization: {
