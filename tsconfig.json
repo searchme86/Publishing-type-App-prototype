@@ -6,6 +6,7 @@
     /* Language and Environment */
     "lib": [
       "dom",
+      "DOM.Iterable",
       "es5",
       "es2015.promise"
     ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
@@ -112,5 +113,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["./src/scripts/**/*"]
+  "include": ["./src/scripts/**/*"],
+  "exclude": ["node_modules"]
 }
