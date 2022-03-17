@@ -4,12 +4,29 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "parser": "@typescript-eslint/parser"
   },
-  "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "plugins": ["prettier", "@typescript-eslint"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "semi": true,
+        "useTabs": 2,
+        "tabWidth": 80,
+        "bracketSpacing": true,
+        "arrowParens": "avoid"
+      }
+    ]
+  }
 }
