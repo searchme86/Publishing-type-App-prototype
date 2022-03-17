@@ -12,7 +12,7 @@ module.exports = {
     poll: 1000,
     ignored: /node_modules/,
   },
-  entry: './src/scripts/app.ts',
+  entry: './src/scripts/app.js',
   output: {
     filename: 'js/bundle.js',
     path: path.resolve(__dirname, './dist'),
@@ -26,7 +26,19 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+            presets: [
+              [
+                '@babel/env',
+                {
+                  useBuiltIns: 'entry',
+                  corejs: 3,
+                  targets: {
+                    browsers: ['last 3 versions', 'ie >= 11'],
+                    node: 'current',
+                  },
+                },
+              ],
+            ],
           },
         },
       },
