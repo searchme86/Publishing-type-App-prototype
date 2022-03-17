@@ -5,4 +5,4 @@ node_modules/
 dist
 
 //webpack
-webapck.config.js
+webpack.config.js
