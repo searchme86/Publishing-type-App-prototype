@@ -22,7 +22,7 @@
       {
         "singleQuote": true,
         "semi": true,
-        "useTabs": 2,
+        "useTabs": true,
         "tabWidth": 80,
         "bracketSpacing": true,
         "arrowParens": "avoid"
